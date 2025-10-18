@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Móveis Premium - Fabricação de Móveis Industrializados</title>
+    <style>
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Botão do WhatsApp */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo h1 {
+            color: #8B4513;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #8B4513;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #8B4513;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Banner Principal */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .banner h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            background-color: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #6b3300;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Seção de Destaques */
+        .destaques {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .destaques .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .destaque-item {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            padding: 30px 20px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .destaque-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .destaque-item i {
+            font-size: 48px;
+            color: #8B4513;
+            margin-bottom: 20px;
+        }
+
+        .destaque-item h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Seção de Produtos */
+        .produtos {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: #8B4513;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .produto-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .produto-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .produto-card h3 {
+            padding: 20px 20px 10px;
+            color: #333;
+        }
+
+        .produto-card p {
+            padding: 0 20px 20px;
+            color: #666;
+        }
+
+        .produto-card .btn {
+            margin: 0 20px 20px;
+            display: block;
+            text-align: center;
+        }
+
+        /* Seção Sobre */
+        .sobre {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .sobre .container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .sobre-content {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+
+        .sobre-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .sobre-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sobre-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* Seção de Depoimentos */
+        .depoimentos {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .depoimento-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .depoimento-card::before {
+            content: '"';
+            font-size: 80px;
+            color: #8B4513;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .depoimento-texto {
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .depoimento-autor h4 {
+            color: #8B4513;
+            margin-bottom: 5px;
+        }
+
+        .depoimento-autor p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Seção de Contato */
+        .contato {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .contato-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .contato-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contato-info h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contato-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contato-info i {
+            margin-right: 10px;
+            color: #8B4513;
+            width: 20px;
+        }
+
+        .contato-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8B4513;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #8B4513;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #8B4513;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #8B4513;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .banner h2 {
+                font-size: 32px;
+            }
+
+            .banner p {
+                font-size: 18px;
+            }
+
+            .destaques .container {
+                flex-direction: column;
+            }
+
+            .destaque-item {
+                margin: 10px 0;
+            }
+
+            .sobre .container {
+                flex-direction: column;
+            }
+
+            .sobre-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .contato-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner {
+                padding: 80px 0;
+            }
+
+            .banner h2 {
+                font-size: 26px;
+            }
+
+            .banner p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .produtos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Botão do WhatsApp fixo -->
+    <a href="https://wa.me/5591981768659" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Móveis Premium</h1>
+                <p>Qualidade e acabamento impecável</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section id="inicio" class="banner">
+        <div class="container">
+            <h2>JC Designer Móveis Industrializados de Alta Qualidade</h2>
+            <p>Fabricamos móveis sob medida com madeira maciça, MDF e metalon</p>
+            <a href="#produtos" class="btn">Conheça Nossos Produtos</a>
+        </div>
+    </section>
+
+    <!-- Seção de Destaques -->
+    <section class="destaques">
+        <div class="container">
+            <div class="destaque-item">
+                <i class="fas fa-check-circle"></i>
+                <h3>Acabamento Impecável</h3>
+                <p>Detalhes que fazem a diferença em cada peça</p>
+            </div>
+            <div class="destaque-item">
+                <i class="fas fa-truck"></i>
+                <h3>Entrega Rápida</h3>
+                <p>Produção ágil e entrega em todo o país</p>
+            </div>
+            <div class="destaque-item">
+                <i class="fas fa-medal"></i>
+                <h3>Qualidade Garantida</h3>
+                <p>Materiais selecionados e durabilidade</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos -->
+    <section id="produtos" class="produtos">
+        <div class="container">
+            <h2 class="section-title">Nossos Produtos</h2>
+            <div class="produtos-grid">
+                <!-- Produto 1 -->
+                <div class="produto-card">
+                    <img src="Imagens/mesas de centro redonda.jpg" alt="Mesa de Madeira Maciça">
+                    <h3>Mesas de Centro</h3>
+                    <p>Mesas rústicas ou modernas com acabamento perfeito</p>
+                    <a href="Paginas/mesamadeira.html" class="btn">Ver detalhes do produto</a>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="produto-card">
+                    <img src="Imagens/Estante no teto.jpg" alt="Estante Estilosa">
+                    <h3>Estantes Suspensa</h3>
+                    <p>Design moderno e funcional para seu espaço</p>
+                    <a href="Paginas/estantedeteto.html" class="btn">Ver detalhe do produto</a>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="produto-card">
+                    <img src="Imagens/mesa de escritório.webp" alt="Mesa de Escritório">
+                    <h3>Mesas de Escritório</h3>
+                    <p>Ergonômicas e perfeitas para home office</p>
+                    <a href="Paginas/mesadeescritorio.html" class="btn">Ver detalhe do produto</a>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="produto-card">
+                    <img src="Imagens/armario de cozinha.webp" alt="Armário de Cozinha">
+                    <h3>Armários de Cozinha</h3>
+                    <p>Personalizados e com ótimo aproveitamento de espaço</p>
+                    <a href="Paginas/armariodecozinha.html" class="btn">Ver detalhe do Produto</a>
+                </div>
+                
+                <!-- Produto 5 -->
+                <div class="produto-card">
+                    <img src="Imagens/ESMALTERIA.webp" alt="Esmalteria">
+                    <h3>Esmalterias</h3>
+                    <p>Organização prática e elegante para seus esmaltes</p>
+                    <a href="Paginas/esmateria.html" class="btn">Ver detalhe do Produto</a>
+                </div>
+                
+                <!-- Produto 6 -->
+                <div class="produto-card">
+                    <img src="Imagens/moveis com metalon e madeira.webp" alt="Móveis com Metalon">
+                    <h3>Móveis do jeitinho que você preferir</h3>
+                    <p>Combinação perfeita de metal e madeira</p>
+                    <a href="Paginas/moveismetalonemedeira.html" class="btn">Ver detalhe do Produto</a>
+                </div>
+
+                <!-- Produto 7 -->
+                <div class="produto-card">
+                    <img src="Imagens/mesa resinada.jpeg" alt="Móveis Resinados">
+                    <h3>Móveis Resinados</h3>
+                    <p>Combinação perfeita de resina e madeira</p>
+                    <a href="Paginas/moveisresinados.html" class="btn">Ver detalhe do Produto</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <div class="sobre-content">
+                <h2 class="section-title">Sobre Nós</h2>
+                <p>Somos uma empresa especializada na fabricação de móveis industrializados de alta qualidade. Trabalhamos com madeira maciça, MDF e metalon, garantindo durabilidade e um acabamento impecável em todos os nossos produtos.</p>
+                <p>Nossa missão é transformar ambientes com móveis que unem funcionalidade, design e qualidade, sempre atendendo às necessidades específicas de cada cliente.</p>
+                <p>Com anos de experiência no mercado, nos orgulhamos de oferecer produtos que superam as expectativas em termos de durabilidade e estética.</p>
+            </div>
+            <div class="sobre-image">
+                <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Nossa Oficina">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section class="depoimentos">
+        <div class="container">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <div class="depoimento-texto">
+                        <p>"Os armários de cozinha que encomendei superaram minhas expectativas. O acabamento é perfeito e o atendimento foi excelente!"</p>
+                    </div>
+                    <div class="depoimento-autor">
+                        <h4>Maria Silva</h4>
+                        <p>São Paulo/SP</p>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <div class="depoimento-texto">
+                        <p>"A mesa de escritório que comprei é linda e muito confortável. Recebi muitos elogios e já indiquei para vários amigos."</p>
+                    </div>
+                    <div class="depoimento-autor">
+                        <h4>Carlos Mendes</h4>
+                        <p>Belo Horizonte/MG</p>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <div class="depoimento-texto">
+                        <p>"Adorei minha esmalteria! Foi feita exatamente como eu queria e chegou antes do prazo. Com certeza vou comprar outros móveis."</p>
+                    </div>
+                    <div class="depoimento-autor">
+                        <h4>Ana Paula</h4>
+                        <p>Rio de Janeiro/RJ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-content">
+                <div class="contato-info">
+                    <h3>Informações de Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Endereço: Rua da Olaria, 19 - Montese - Belém/PA</p>
+                    <p><i class="fas fa-phone"></i> Telefone: (91) 98176-8659</p>
+                    <p><i class="fas fa-envelope"></i> Email: valtemircastelhano75@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Horário de Atendimento: Seg-Sex: 8h-18h | Sáb: 8h-12h</p>
+                </div>
+                <div class="contato-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Seu Nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Seu Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Seu Telefone">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Móveis Premium</h3>
+                    <p>Fabricamos móveis industrializados com qualidade superior e acabamento impecável.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Móveis Premium. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
